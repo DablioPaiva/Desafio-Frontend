@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/css/style.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
     <title></title>
 </head>
 <body>
@@ -79,6 +79,7 @@
         </div>
 
         <div class="products">
+            {% include 'produto_list.html' %}
         </div>
         <button id="allcardsbtn">Ainda mais produtos aqui!</button>
     </div>
@@ -101,7 +102,7 @@
         </div>
         <button id="allcardsbtn" onclick="validations()">Enviar agora</button>
     </div>
-    <script src="static/js/script.js"></script>
+
 </main>
 <footer>
     <div class="footer">
@@ -110,5 +111,16 @@
         <p>2019</p>
     </div>
 </footer>
+<script src="../../js/script.js"></script>
+<script>
+    xhr = new XMLHttpRequest();
+    xhr.open('GET', '/list');
+    xhr.send(null);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('itemProdutos').innerHTML = xhr.response;
+        }
+    }
+</script>
 </body>
 </html>

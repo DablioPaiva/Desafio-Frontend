@@ -50,7 +50,7 @@ function validations() {
 }
 
 async function Products() {
-    const response = await fetch(`//json  =${currentPage}`)
+    const response = await fetch(`./products.json =${currentPage}`)
 
     return response.json()
 }
