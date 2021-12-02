@@ -1,74 +1,130 @@
+const containerProducts = document.getElementsByClassName('products')[0];
+
+let currentPage = 1;
+
+const infinitePage = document.getElementById('allcardsbtn');
+
+infinitePage.addEventListener('click', function () {
+    currentPage++;
+    getProducts();
+})
+
 function validation() {
-    if (document.getElementById('name').value.length<3) {
+    if (document.getElementById('fname').value.length < 3) {
         alert("Por favor, informe o seu nome!");
-        document.getElementById("name").focus();
+        document.getElementById("fname").focus();
         return false;
     }
 
-    if (document.getElementById("email").value.length<9){
+    if (document.getElementById("email").value.length < 9) {
         alert("Por favor, informe um endereço de e-mail válido!");
         document.getElementById("email").focus();
         return false;
     }
 
-    if (document.getElementById("cpf").value.length!=11){
+    if (document.getElementById("cpf").value.length != 11) {
         alert("Por favor, informe um CPF válido!");
         document.getElementById("cpf").focus();
         return false;
-    }
-
-    else {
+    } else {
         alert("Cadastro realizado com sucesso!")
     }
     return true;
 }
 
 function validations() {
-    if (document.getElementById('friendname').value.length<3) {
+    if (document.getElementById('friendname').value.length < 3) {
         alert("Por favor, informe o nome do seu amigo!");
         document.getElementById("friendname").focus();
         return false;
     }
 
-    if (document.getElementById("friendmail").value.length<9){
+    if (document.getElementById("friendmail").value.length < 9) {
         alert("Por favor, informe um endereço de e-mail válido!");
         document.getElementById("friendmail").focus();
         return false;
-    }
-
-    else {
+    } else {
         alert("Convite realizado com sucesso!")
     }
     return true;
 }
 
-function callApi(url) {
-    let request = new XMLHttpRequest()
-    request.open("GET", url, false)
-    request.send()
-    return request.responseText
+async function Products() {
+    const response = await fetch(`//json  =${currentPage}`)
+
+    return response.json()
 }
 
-window.onload = function (produto) {
+function getProducts() {
+    Products().then(data => {
+        const result = data.products
 
-    var image = innerHTML(produto.image);
-    var productname = innerHTML(produto.name);
-    var price = innerHTML(produto.oldPrice);
-    var productprice = innerHTML(produto.price);
-    var otherprice = innerHTML(produto.count);
-    var description = innerHTML(produto.description);
-
-
-    document.getElementById("ftext").innerHTML = price;
-
+        for (let p of result) {
+            containerProducts.appendChild(buildComponentProduct(p))
+        }
+    })
 }
 
-function fill() {
-    let data = callApi("");
-    let produtos = JSON.parse(data);
-    let box = document.getElementById("products_item");
-    produtos.forEach(element => {
-        let card = createCard(element);
-        box.appendChild(card);
-    });
+function buildComponentProduct(product) {
+    if (!product) return udefined;
 }
+
+const container = document.createElement("div");
+container.className = 'products_item';
+
+const productsPicture = document.createElement("img");
+productsPicture.className = 'products_picture';
+productsPicture.setAttribute('src', `https:${product.image}`);
+
+const productsText = document.createElement("div");
+productsText.className = 'products_text';
+
+const productName = document.createElement("p");
+productName.className = 'product_name';
+productName.id = 'name';
+productName.innerText = product.name;
+
+const description = document.createElement("p");
+description.className = 'description';
+description.id = 'description';
+description.innerText = product.description;
+
+const price = document.createElement("p");
+price.className = 'price';
+price.id = 'oldPrice';
+price.innerText = `De: ${moeda(product.oldPrice)}`;
+
+const productPrice = document.createElement("p");
+productPrice.className = 'product_price';
+productPrice.id = 'price';
+productPrice.innerText = `Por: ${moeda(product.price)}`;
+
+const installments = document.createElement("p");
+installments.className = 'installments';
+installments.innerText = `ou ${product.installments.count}x de ${moeda(product.installments.value)}`;
+
+const btn = document.createElement("button");
+btn.className = 'btn_comprar';
+btn.innerText = 'Comprar';
+btn.addEventListener('click', function () {
+    console.log(product.id);
+})
+
+productsText.appendChild(productName);
+productsText.appendChild(description);
+productsText.appendChild(price);
+productsText.appendChild(productPrice);
+productsText.appendChild(installments);
+
+container.appendChild(productsPicture);
+container.appendChild(productsText);
+container.appendChild(btn);
+
+return container;
+
+
+function moeda(valor) {
+    return `R$ ${parseFloat(valor).toFixed(2).toString().replace('.', ',')}`
+}
+
+getProducts();
