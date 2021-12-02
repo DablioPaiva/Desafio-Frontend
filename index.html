@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="static/css/style.css" rel="stylesheet">
+    <script src="static/js/script.js"></script>
     <title></title>
 </head>
+<body>
 <header>
     <p id="ftext">uma seleção de produtos</p>
     <h1>especial para você</h1>
@@ -13,13 +15,13 @@
     <a href="https://www.linx.com.br/">
         <button>Conheça a Linx</button>
     </a>
-    <a href="#algoritmo">
+    <a href="#algoritm">
         <button>Ajude o algorítimo</button>
     </a>
-    <a href="#produtos">
+    <a href="#products">
         <button>Seus produtos</button>
     </a>
-    <a href="#compartilhe">
+    <a href="#share">
         <button>Compartilhe</button>
     </a>
 
@@ -52,42 +54,42 @@
         </div>
         <div>
             <div class="itemFormulario">
-                <form>
-                    <p>Seu nome:</p>
-                    <input type="text" name="name">
-                    <p>E-mail</p>
-                    <input type="email" name="email">
-                    <p>CPF:</p>
-                    <input type="number" name="cpf">
+                <form name="fform" action="#" onsubmit="validation()">
+                    <label for="name"><p>Seu Nome:</p></label>
+                    <input type="text" id="name" required>
+                    <label for="email"><p>E-mail</p></label>
+                    <input type="email" id="email" required>
+                    <label for="cpf"><p>CPF:</p></label>
+                    <input type="number" id="cpf" required>
                     <div class="radiosx">
                         <div class="feminino">
-                            <input type="radio" name="f">
-                            <p>Feminino</p>
+                            <input type="radio" id="f">
+                            <label for="f">Feminino</label>
                         </div>
                         <div class="masculino">
-                            <input type="radio" name="m">
-                            <p>Masculino</p>
+                            <input type="radio" id="m">
+                            <label for="m">Masculino</label>
                         </div>
                     </div>
-                    <input type="submit">
+                    <input id="send" type="submit">
                 </form>
             </div>
         </div>
         <div class="selection">
-            <a><p>Compartilhe a novidade</p></a>
+            <a><p>Sua seleção especial</p></a>
         </div>
 
         <div class="products">
             <div class="products_item">
                 <div class="products_img"></div>
-                <div class="products_text">
+                <!--div class="products_text">
                     <p class="product_name">Nome do produto</p>
                     <p class="description">descrição do produto</p>
                     <p>De: R$23,99</p>
                     <p class="product_price">Por: R$19,99</p>
                     <p>ou 2x de R$9,99</p>
                     <button>Comprar</button>
-                </div>
+                </div-->
             </div>
         </div>
         <button id="allcardsbtn">Ainda mais produtos aqui!</button>
@@ -98,16 +100,18 @@
     <div class="sharing">
         <p>Quer que seus amigos também ganhem a lista personalizada deles? Preencha agora!</p>
         <div class="sharing_form">
-            <div>
-                <p>Nome do seu amigo:</p>
-                <input type="text">
-            </div>
-            <div>
-                <p>E-mail:</p>
-                <input type="text">
-            </div>
+            <form name="sform" action="#">
+                <div>
+                    <label for="friendname"><p>Nome do seu amigo:</p></label>
+                    <input type="text" id="friendname" required>
+                </div>
+                <div>
+                    <label for="friendmail"><p>E-mail:</p></label>
+                    <input type="email" id="friendmail" required>
+                </div>
+            </form>
         </div>
-        <button id="allcardsbtn">Enviar agora</button>
+        <button id="allcardsbtn" onclick="validations()">Enviar agora</button>
     </div>
 </main>
 <footer>
