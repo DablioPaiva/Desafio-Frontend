@@ -379,8 +379,10 @@ footer p {
     }
 
     .selection {
-        width: 100%;
-
+        top: 788px;
+        left: 666px;
+        width: 181px;
+        height: 22px;
     }
 
     .description {
