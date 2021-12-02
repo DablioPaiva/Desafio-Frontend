@@ -7,17 +7,21 @@ class ProdutoDAO():
     def listAll(self) -> List[Product]:
         result = []
         with open('products.json', 'r') as file:
-            product_dict_list = json.load(file)
-
-            for product_dict in product_dict_list:
-                id = product_dict.get("id")
-                name = product_dict.get("name")
-                image = product_dict.get("image", None)
-                oldPrice = product_dict.get("oldPrice", None)
-                price = product_dict.get("price", None)
-                description = product_dict.get("description", None)
-                count = product_dict.get("count", None)
-                value = product_dict.get("value", None)
-                product = Product(id, name, image, oldPrice, price, description, count, value)
-                result.append(product)
+            product_list = json.load(file)
+            result = self.convertDictList(product_list)
         return result
+
+    def convertDictList (self, products):
+        resultado = []
+        for produto in products:
+            product = Product()
+            product.setId(produto['id'])
+            product.setName(produto['name'])
+            product.setDescription(produto['description'])
+            product.setImage(produto['image'])
+            product.setOldPrice(produto['oldPrice'])
+            product.setPrice(produto['price'])
+            product.setCount(produto['installments']['count'])
+            product.setValue(produto['installments']['value'])
+            resultado.append(product)
+        return resultado

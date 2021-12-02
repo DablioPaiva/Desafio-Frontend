@@ -1,14 +1,14 @@
 {% for product in product_list %}
 <div class="products_item">
         <div class="products_img">
-            <img src={{product.image}} alt="">
+            <img src={{product.getImage()}} alt="">
         </div>
         <div class="products_text">
-            <p class="product_name">{{product.name}}</p>
-            <p class="description">{{product.description}}</p>
-            <p>De: R$ {{product.oldPrice}},00</p>
-            <p class="product_price">Por: R${{product.price}},00 </p>
-            <p>ou {{product.count}} de {{product.value}},00 </p>
+            <p class="product_name">{{product.getName()}}</p>
+            <p class="description">{{product.getDescription()}}</p>
+            <p>De: R$ {{product.getOldPrice()}},00</p>
+            <p class="product_price">Por: R${{product.getPrice()}},00 </p>
+            <p>ou {{product.getCount()}}x de {{product.getValue()}}0</p>
             <button>Comprar</button>
         </div>
     </div>
