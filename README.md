@@ -17,9 +17,9 @@ cada produto retornado pelo serviço, um card de produto com as respectivas info
 criado na grade de produtos;
 
 Tecnologias usadas:
- -HTML
- -CSS
- -JavaScript
- -Ajax (XMLHttpRequest e JSON)
- -Python
- -Flask
+ - HTML
+ - CSS
+ - JavaScript
+ - Ajax (XMLHttpRequest e JSON)
+ - Python
+ - Flask
